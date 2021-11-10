@@ -31,5 +31,9 @@ public class EmployeeService {
         
     }
 
+    public List<Employee> getAllSpouseDetail(){
+        return employeeRepository.getAll();
+    }
+
 
 }

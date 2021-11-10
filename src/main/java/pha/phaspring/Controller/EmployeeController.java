@@ -83,5 +83,13 @@ public class EmployeeController {
         return employeeService.getByEmployeeID(Id);
     }
 
+    @GetMapping("employee3")
+    public List <Employee> getAllSpouseDetailWithEmployee(){
+        return employeeService.getAllSpouseDetail();
+
+    }
+
+
+
   
 }
