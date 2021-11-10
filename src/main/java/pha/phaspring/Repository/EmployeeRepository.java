@@ -20,10 +20,11 @@ public interface EmployeeRepository extends JpaRepository <Employee,Integer>{
   //@Query (value = "select * from employee e where e.Id = :Id",nativeQuery = true)
   //List<Employee> queryBy (@Param("Id") Integer Id);
 
-  @Query (value = "SELECT * FROM employee e INNER JOIN employeeaddress ea on e.AddressID =ea.AddressID where e.Id = :Id",nativeQuery = true)
+  @Query (value = "SELECT e.ID,e.EmployeeID,e.EmpName,e.PassportNo,e.PassportCopy,e.MaritalStatus,e.PhoneNum,e.HouseNum,e.EmpEmail,e.AddressID,e.EmergencyContact,e.SpouseID,e.ChildID,e.PDPA, ea.C_City as CCity FROM employee e JOIN employeeaddress ea on e.AddressID =ea.AddressID where ea.Id = :Id",nativeQuery = true)
   public List<Employee> queryBy(@Param("Id") Integer Id);
 
 }
+
 
 
  

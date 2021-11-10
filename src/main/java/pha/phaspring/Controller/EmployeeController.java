@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pha.phaspring.Model.ChildrenDetail;
 import pha.phaspring.Model.EmergencyContact;
 import pha.phaspring.Model.Employee;
 import pha.phaspring.Model.EmployeeAddress;
 import pha.phaspring.Model.SpouseDetail;
+import pha.phaspring.Repository.ChildrenDetailRepository;
 import pha.phaspring.Repository.EmergencyContactRepository;
 import pha.phaspring.Repository.EmployeeAddressRepository;
 import pha.phaspring.Repository.SpouseDetailRepository;
@@ -33,6 +35,9 @@ public class EmployeeController {
 
     @Autowired
     private SpouseDetailRepository spouseDetailRepository;
+
+    @Autowired
+    private ChildrenDetailRepository childrenDetailRepository;
     
 
     @GetMapping("employee")
@@ -56,6 +61,12 @@ public class EmployeeController {
     @GetMapping("spousedetail")
     public List<SpouseDetail> getAllSpouseDetail(){
         return spouseDetailRepository.findAll();
+
+    }
+
+    @GetMapping("childrendetail")
+    public List<ChildrenDetail> getAllChildrenDetail(){
+        return childrenDetailRepository.findAll();
 
     }
 
