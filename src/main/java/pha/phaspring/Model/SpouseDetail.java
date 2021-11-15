@@ -1,13 +1,10 @@
 package pha.phaspring.Model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,71 +12,59 @@ import javax.persistence.Table;
 public class SpouseDetail {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SpouseID")
-    private int SpouseID;
+    private int spouseId;
     
     @Column(name = "SpouseName")
-    private String SpouseName;
+    private String spouseName;
     @Column(name = "Occupation")
-    private String Occupation;
+    private String occupation;
     @Column(name = "ContactNum")
-    private String ContactNum;
+    private String contactNum;
     @Column(name = "MarriageCert")
-    private String MarriageCert;
+    private String marriageCert;
 
-    //@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "spouseDetail" )
-    //private Employee employee;
-
-    public SpouseDetail() {
+    public int getSpouseId() {
+        return spouseId;
     }
 
-    public SpouseDetail(int spouseID, String spouseName, String occupation, String contactNum, String marriageCert) {
-        SpouseID = spouseID;
-        SpouseName = spouseName;
-        Occupation = occupation;
-        ContactNum = contactNum;
-        MarriageCert = marriageCert;
-    }
-
-    public int getSpouseID() {
-        return SpouseID;
-    }
-
-    public void setSpouseID(int spouseID) {
-        SpouseID = spouseID;
+    public void setSpouseId(int spouseId) {
+        this.spouseId = spouseId;
     }
 
     public String getSpouseName() {
-        return SpouseName;
+        return spouseName;
     }
 
     public void setSpouseName(String spouseName) {
-        SpouseName = spouseName;
+        this.spouseName = spouseName;
     }
 
     public String getOccupation() {
-        return Occupation;
+        return occupation;
     }
 
     public void setOccupation(String occupation) {
-        Occupation = occupation;
+        this.occupation = occupation;
     }
 
     public String getContactNum() {
-        return ContactNum;
+        return contactNum;
     }
 
     public void setContactNum(String contactNum) {
-        ContactNum = contactNum;
+        this.contactNum = contactNum;
     }
 
     public String getMarriageCert() {
-        return MarriageCert;
+        return marriageCert;
     }
 
     public void setMarriageCert(String marriageCert) {
-        MarriageCert = marriageCert;
+        this.marriageCert = marriageCert;
     }
+
+    
     
 }

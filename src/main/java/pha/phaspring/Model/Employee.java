@@ -1,11 +1,7 @@
 package pha.phaspring.Model;
 
-
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,227 +9,210 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-
-
-
-
-
 @Entity
 @Table(name="employee")
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int Id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int id;
     
     @Column(name = "EmployeeID")
-    private String EmployeeId;
+    private String employeeId;
     @Column(name = "EmpName")
-    private String EmpName;
+    private String empName;
     @Column(name = "PassportNo")
-    private String PassportNo;
+    private String passportNo;
     @Column(name = "PassportCopy")
-    private String PassportCopy;
+    private String passportCopy;
     @Column(name = "MaritalStatus")
-    private String MaritalStatus;
+    private String maritalStatus;
     @Column(name = "PhoneNum")
-    private int PhoneNum;
+    private String phoneNum;
     @Column(name = "HouseNum")
-    private int HouseNum;
+    private String houseNum;
     @Column(name = "EmpEmail")
-    private String EmpEmail;
-    @Column(name = "AddressID")
-    private int AddressId;
-    @Column(name = "EmergencyContact")
-    private int EmergencyContact;
-    @Column(name = "SpouseID")
-    private int SpouseId;
-    @Column(name = "ChildID")
-    private int ChildId;
+    private String empEmail;
     @Column(name = "PDPA")
-    private String PDPA;
+    private String pdpa;
 
-  /*  @OneToOne(fetch =FetchType.EAGER, cascade =  CascadeType.ALL)
-    @JoinColumn(name ="AddressID",insertable = false, updatable = false)
+
+    @Column(name = "ChildID")
+    private int childId;
+    
+    @OneToOne
+    @JoinColumn(name="AddressID")
     private EmployeeAddress employeeAddress;
 
- 
-    @OneToOne(fetch =FetchType.LAZY, cascade =  CascadeType.ALL)
-    @JoinColumn(name ="EmergencyContact",insertable = false, updatable = false)
+    @OneToOne
+    @JoinColumn(name="EmergencyContact")
     private EmergencyContact emergencyContact;
 
-    @OneToOne(fetch =FetchType.LAZY, cascade =  CascadeType.ALL)
-    @JoinColumn(name ="SpouseID",insertable = false, updatable = false)
-    private SpouseDetail spouseDetail;*/
-
+    @OneToOne
+    @JoinColumn(name="SpouseID")
+    private SpouseDetail spouseDetail;
+    
 
     public Employee() {
     }
 
 
     public Employee(int id, String employeeId, String empName, String passportNo, String passportCopy,
-            String maritalStatus, int phoneNum, int houseNum, String empEmail, int addressId, int emergencyContact,
-            int spouseId, int childId, String pDPA) {
-        Id = id;
-        EmployeeId = employeeId;
-        EmpName = empName;
-        PassportNo = passportNo;
-        PassportCopy = passportCopy;
-        MaritalStatus = maritalStatus;
-        PhoneNum = phoneNum;
-        HouseNum = houseNum;
-        EmpEmail = empEmail;
-        AddressId = addressId;
-        EmergencyContact = emergencyContact;
-        SpouseId = spouseId;
-        ChildId = childId;
-        PDPA = pDPA;
+            String maritalStatus, String phoneNum, String houseNum, String empEmail, String pdpa, int childId,
+            EmployeeAddress employeeAddress, EmergencyContact emergencyContact,SpouseDetail spouseDetail) {
+        this.id = id;
+        this.employeeId = employeeId;
+        this.empName = empName;
+        this.passportNo = passportNo;
+        this.passportCopy = passportCopy;
+        this.maritalStatus = maritalStatus;
+        this.phoneNum = phoneNum;
+        this.houseNum = houseNum;
+        this.empEmail = empEmail;
+        this.pdpa = pdpa;
+        this.childId = childId;
+        this.employeeAddress = employeeAddress;
+        this.emergencyContact = emergencyContact;
+        this.spouseDetail = spouseDetail;
     }
 
 
     public int getId() {
-        return Id;
+        return id;
     }
 
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
 
     public String getEmployeeId() {
-        return EmployeeId;
+        return employeeId;
     }
 
 
     public void setEmployeeId(String employeeId) {
-        EmployeeId = employeeId;
+        this.employeeId = employeeId;
     }
 
 
     public String getEmpName() {
-        return EmpName;
+        return empName;
     }
 
 
     public void setEmpName(String empName) {
-        EmpName = empName;
+        this.empName = empName;
     }
 
 
     public String getPassportNo() {
-        return PassportNo;
+        return passportNo;
     }
 
 
     public void setPassportNo(String passportNo) {
-        PassportNo = passportNo;
+        this.passportNo = passportNo;
     }
 
 
     public String getPassportCopy() {
-        return PassportCopy;
+        return passportCopy;
     }
 
 
     public void setPassportCopy(String passportCopy) {
-        PassportCopy = passportCopy;
+        this.passportCopy = passportCopy;
     }
 
 
     public String getMaritalStatus() {
-        return MaritalStatus;
+        return maritalStatus;
     }
 
 
     public void setMaritalStatus(String maritalStatus) {
-        MaritalStatus = maritalStatus;
+        this.maritalStatus = maritalStatus;
     }
 
 
-    public int getPhoneNum() {
-        return PhoneNum;
+    public String getPhoneNum() {
+        return phoneNum;
     }
 
 
-    public void setPhoneNum(int phoneNum) {
-        PhoneNum = phoneNum;
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 
 
-    public int getHouseNum() {
-        return HouseNum;
+    public String getHouseNum() {
+        return houseNum;
     }
 
 
-    public void setHouseNum(int houseNum) {
-        HouseNum = houseNum;
+    public void setHouseNum(String houseNum) {
+        this.houseNum = houseNum;
     }
 
 
     public String getEmpEmail() {
-        return EmpEmail;
+        return empEmail;
     }
 
 
     public void setEmpEmail(String empEmail) {
-        EmpEmail = empEmail;
+        this.empEmail = empEmail;
     }
 
 
-    public int getAddressId() {
-        return AddressId;
+    public String getPdpa() {
+        return pdpa;
     }
 
 
-    public void setAddressId(int addressId) {
-        AddressId = addressId;
+    public void setPdpa(String pdpa) {
+        this.pdpa = pdpa;
     }
-
-
-    public int getEmergencyContact() {
-        return EmergencyContact;
-    }
-
-
-    public void setEmergencyContact(int emergencyContact) {
-        EmergencyContact = emergencyContact;
-    }
-
-
-    public int getSpouseId() {
-        return SpouseId;
-    }
-
-
-    public void setSpouseId(int spouseId) {
-        SpouseId = spouseId;
-    }
-
 
     public int getChildId() {
-        return ChildId;
+        return childId;
     }
 
 
     public void setChildId(int childId) {
-        ChildId = childId;
+        this.childId = childId;
     }
 
 
-    public String getPDPA() {
-        return PDPA;
+    public EmployeeAddress getEmployeeAddress() {
+        return employeeAddress;
     }
 
 
-    public void setPDPA(String pDPA) {
-        PDPA = pDPA;
+    public void setEmployeeAddress(EmployeeAddress employeeAddress) {
+        this.employeeAddress = employeeAddress;
     }
 
 
+    public EmergencyContact getEmergencyContact() {
+        return emergencyContact;
+    }
+
+
+    public void setEmergencyContact(EmergencyContact emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
+
+
+    public SpouseDetail getSpouseDetail() {
+        return spouseDetail;
+    }
+
+
+    public void setSpouseDetail(SpouseDetail spouseDetail) {
+        this.spouseDetail = spouseDetail;
+    }
     
-
-
 }

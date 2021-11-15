@@ -14,81 +14,73 @@ import javax.persistence.Table;
 public class ChildrenDetail {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ChildID")
-    private int ChildID;
+    private int childId;
     
     @Column(name = "Childname")
-    private String Childname;
+    private String childName;
     @Column(name = "ChildDate")
-    private Date ChildDate;
+    private Date childDate;
     @Column(name = "BirthCert")
-    private String BirthCert;
+    private String birthCert;
     @Column(name = "Nationality")
-    private String Nationality;
+    private String nationality;
     @Column(name = "Occu")
-    private String Occu;
+    private String occu;
 
     public ChildrenDetail() {
     }
 
-    public ChildrenDetail(int childID, String childname, Date childDate, String birthCert, String nationality,
-            String occu) {
-        ChildID = childID;
-        Childname = childname;
-        ChildDate = childDate;
-        BirthCert = birthCert;
-        Nationality = nationality;
-        Occu = occu;
+    public int getChildId() {
+        return childId;
     }
 
-    public int getChildID() {
-        return ChildID;
+    public void setChildId(int childId) {
+        this.childId = childId;
     }
 
-    public void setChildID(int childID) {
-        ChildID = childID;
+    public String getChildName() {
+        return childName;
     }
 
-    public String getChildname() {
-        return Childname;
-    }
-
-    public void setChildname(String childname) {
-        Childname = childname;
+    public void setChildName(String childName) {
+        this.childName = childName;
     }
 
     public Date getChildDate() {
-        return ChildDate;
+        return childDate;
     }
 
     public void setChildDate(Date childDate) {
-        ChildDate = childDate;
+        this.childDate = childDate;
     }
 
     public String getBirthCert() {
-        return BirthCert;
+        return birthCert;
     }
 
     public void setBirthCert(String birthCert) {
-        BirthCert = birthCert;
+        this.birthCert = birthCert;
     }
 
     public String getNationality() {
-        return Nationality;
+        return nationality;
     }
 
     public void setNationality(String nationality) {
-        Nationality = nationality;
+        this.nationality = nationality;
     }
 
     public String getOccu() {
-        return Occu;
+        return occu;
     }
 
     public void setOccu(String occu) {
-        Occu = occu;
+        this.occu = occu;
     }
+
+   
     
     
 }

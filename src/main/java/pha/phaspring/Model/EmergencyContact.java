@@ -1,13 +1,10 @@
 package pha.phaspring.Model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -16,94 +13,79 @@ import javax.persistence.Table;
 public class EmergencyContact {
     
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "EmergencyContact")
-    private int EmergencyContact;
+    private int emergencyContact;
 
     @Column(name = "Name_1")
-    private String Name_1;
+    private String name1;
     @Column(name = "Relationship_1")
-    private String Relationship_1;
+    private String relationship1;
     @Column(name = "ContactNum_1")
-    private String ContactNum_1;
+    private String contactNum1;
     @Column(name = "Name_2")
-    private String Name_2;
+    private String name2;
     @Column(name = "Relationship_2")
-    private String Relationship_2;
+    private String relationship2;
     @Column(name = "ContactNum_2")
-    private String ContactNum_2;
-
-   // @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "emergencyContact" )
-    //private Employee employee;
-
-    public EmergencyContact() {
-    }
-
-    public EmergencyContact(int emergencyContact, String name_1, String relationship_1, String contactNum_1,
-            String name_2, String relationship_2, String contactNum_2) {
-        EmergencyContact = emergencyContact;
-        Name_1 = name_1;
-        Relationship_1 = relationship_1;
-        ContactNum_1 = contactNum_1;
-        Name_2 = name_2;
-        Relationship_2 = relationship_2;
-        ContactNum_2 = contactNum_2;
-    }
+    private String contactNum2;
 
     public int getEmergencyContact() {
-        return EmergencyContact;
+        return emergencyContact;
     }
 
     public void setEmergencyContact(int emergencyContact) {
-        EmergencyContact = emergencyContact;
+        this.emergencyContact = emergencyContact;
     }
 
-    public String getName_1() {
-        return Name_1;
+    public String getName1() {
+        return name1;
     }
 
-    public void setName_1(String name_1) {
-        Name_1 = name_1;
+    public void setName1(String name1) {
+        this.name1 = name1;
     }
 
-    public String getRelationship_1() {
-        return Relationship_1;
+    public String getRelationship1() {
+        return relationship1;
     }
 
-    public void setRelationship_1(String relationship_1) {
-        Relationship_1 = relationship_1;
+    public void setRelationship1(String relationship1) {
+        this.relationship1 = relationship1;
     }
 
-    public String getContactNum_1() {
-        return ContactNum_1;
+    public String getContactNum1() {
+        return contactNum1;
     }
 
-    public void setContactNum_1(String contactNum_1) {
-        ContactNum_1 = contactNum_1;
+    public void setContactNum1(String contactNum1) {
+        this.contactNum1 = contactNum1;
     }
 
-    public String getName_2() {
-        return Name_2;
+    public String getName2() {
+        return name2;
     }
 
-    public void setName_2(String name_2) {
-        Name_2 = name_2;
+    public void setName2(String name2) {
+        this.name2 = name2;
     }
 
-    public String getRelationship_2() {
-        return Relationship_2;
+    public String getRelationship2() {
+        return relationship2;
     }
 
-    public void setRelationship_2(String relationship_2) {
-        Relationship_2 = relationship_2;
+    public void setRelationship2(String relationship2) {
+        this.relationship2 = relationship2;
     }
 
-    public String getContactNum_2() {
-        return ContactNum_2;
+    public String getContactNum2() {
+        return contactNum2;
     }
 
-    public void setContactNum_2(String contactNum_2) {
-        ContactNum_2 = contactNum_2;
+    public void setContactNum2(String contactNum2) {
+        this.contactNum2 = contactNum2;
     }
+
+    
 
 }
