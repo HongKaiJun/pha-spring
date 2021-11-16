@@ -1,6 +1,5 @@
 package pha.phaspring.Response;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import pha.phaspring.Model.ChildrenDetail;
 import pha.phaspring.Model.Employee;
-import pha.phaspring.Model.EmployeeAddress;
 
 public class EmployeeResponse {
     @JsonProperty("ID")
@@ -48,8 +46,6 @@ public class EmployeeResponse {
     private String occupation;
     private String contactNum;
     private String marriageCert;
-
-    private EmployeeAddressResponse employeeAddressResponse;
 
     private List<ChildrenResponse> childrenResponse;
 
@@ -468,24 +464,6 @@ public class EmployeeResponse {
     public void setMarriageCert(String marriageCert) {
         this.marriageCert = marriageCert;
     }
-
-    
-
-
-
-    public EmployeeAddressResponse getEmployeeAddressResponse() {
-        return employeeAddressResponse;
-    }
-
-
-
-
-    public void setEmployeeAddressResponse(EmployeeAddressResponse employeeAddressResponse) {
-        this.employeeAddressResponse = employeeAddressResponse;
-    }
-
-
-
 
     public List<ChildrenResponse> getChildrenResponse() {
         return childrenResponse;
