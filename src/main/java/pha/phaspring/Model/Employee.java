@@ -1,13 +1,19 @@
 package pha.phaspring.Model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -53,6 +59,12 @@ public class Employee {
     
     @OneToMany(mappedBy = "employee")
     private List <ChildrenDetail> childDetail;
+
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "employee_education",
+    joinColumns = {@JoinColumn(name="employee_id")},
+    inverseJoinColumns = {@JoinColumn(name ="education_empEdu")})
+    private Set <EducationDetails> educationdetails = new HashSet<>();
 
     public Employee() {
     }
@@ -216,6 +228,18 @@ public class Employee {
     public void setChildDetail(List<ChildrenDetail> childDetail) {
         this.childDetail = childDetail;
     }
+
+
+    public Set<EducationDetails> getEducationdetails() {
+        return educationdetails;
+    }
+
+
+    public void setEducationdetails(Set<EducationDetails> educationdetails) {
+        this.educationdetails = educationdetails;
+    }
+
+    
     
     
 }

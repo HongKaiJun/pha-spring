@@ -1,10 +1,17 @@
 package pha.phaspring.Model;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,59 +19,77 @@ import javax.persistence.Table;
 public class EducationDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "EmpEdu")
-    private int EmpEdu;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int empEdu;
 
     @Column(name = "CollegeName")
-    private String CollegeName;
+    private String collegeName;
 
     @Column(name = "YearObtain")
-    private String YearObtain;
+    private Date yearObtain;
 
     @Column(name = "Certificate")
-    private String Certificate;
+    private String certificate;
+
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "educationdetails" )
+    private Set<Employee> employees = new HashSet<>();
 
     public EducationDetails() {
     }
 
-    public EducationDetails(int empEdu, String collegeName, String yearObtain, String certificate) {
-        EmpEdu = empEdu;
-        CollegeName = collegeName;
-        YearObtain = yearObtain;
-        Certificate = certificate;
+    
+
+    public EducationDetails(String collegeName, Date yearObtain, String certificate) {
+        this.collegeName = collegeName;
+        this.yearObtain = yearObtain;
+        this.certificate = certificate;
     }
 
+
+
     public int getEmpEdu() {
-        return EmpEdu;
+        return empEdu;
     }
 
     public void setEmpEdu(int empEdu) {
-        EmpEdu = empEdu;
+        this.empEdu = empEdu;
     }
 
     public String getCollegeName() {
-        return CollegeName;
+        return collegeName;
     }
 
     public void setCollegeName(String collegeName) {
-        CollegeName = collegeName;
+        this.collegeName = collegeName;
     }
 
-    public String getYearObtain() {
-        return YearObtain;
+    public Date getYearObtain() {
+        return yearObtain;
     }
 
-    public void setYearObtain(String yearObtain) {
-        YearObtain = yearObtain;
+    public void setYearObtain(Date yearObtain) {
+        this.yearObtain = yearObtain;
     }
 
     public String getCertificate() {
-        return Certificate;
+        return certificate;
     }
 
     public void setCertificate(String certificate) {
-        Certificate = certificate;
+        this.certificate = certificate;
     }
 
+
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
+    }
+
+    
 }
