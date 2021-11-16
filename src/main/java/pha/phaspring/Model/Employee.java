@@ -1,11 +1,14 @@
 package pha.phaspring.Model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,10 +39,6 @@ public class Employee {
     @Column(name = "PDPA")
     private String pdpa;
 
-
-    @Column(name = "ChildID")
-    private int childId;
-    
     @OneToOne
     @JoinColumn(name="AddressID")
     private EmployeeAddress employeeAddress;
@@ -52,14 +51,17 @@ public class Employee {
     @JoinColumn(name="SpouseID")
     private SpouseDetail spouseDetail;
     
+    @OneToMany(mappedBy = "employee")
+    private List <ChildrenDetail> childDetail;
 
     public Employee() {
     }
 
 
     public Employee(int id, String employeeId, String empName, String passportNo, String passportCopy,
-            String maritalStatus, String phoneNum, String houseNum, String empEmail, String pdpa, int childId,
-            EmployeeAddress employeeAddress, EmergencyContact emergencyContact,SpouseDetail spouseDetail) {
+            String maritalStatus, String phoneNum, String houseNum, String empEmail, String pdpa,
+            EmployeeAddress employeeAddress, EmergencyContact emergencyContact, SpouseDetail spouseDetail,
+            List<ChildrenDetail> childDetail) {
         this.id = id;
         this.employeeId = employeeId;
         this.empName = empName;
@@ -70,10 +72,10 @@ public class Employee {
         this.houseNum = houseNum;
         this.empEmail = empEmail;
         this.pdpa = pdpa;
-        this.childId = childId;
         this.employeeAddress = employeeAddress;
         this.emergencyContact = emergencyContact;
         this.spouseDetail = spouseDetail;
+        this.childDetail = childDetail;
     }
 
 
@@ -176,16 +178,6 @@ public class Employee {
         this.pdpa = pdpa;
     }
 
-    public int getChildId() {
-        return childId;
-    }
-
-
-    public void setChildId(int childId) {
-        this.childId = childId;
-    }
-
-
     public EmployeeAddress getEmployeeAddress() {
         return employeeAddress;
     }
@@ -214,5 +206,16 @@ public class Employee {
     public void setSpouseDetail(SpouseDetail spouseDetail) {
         this.spouseDetail = spouseDetail;
     }
+
+
+    public List<ChildrenDetail> getChildDetail() {
+        return childDetail;
+    }
+
+
+    public void setChildDetail(List<ChildrenDetail> childDetail) {
+        this.childDetail = childDetail;
+    }
+    
     
 }

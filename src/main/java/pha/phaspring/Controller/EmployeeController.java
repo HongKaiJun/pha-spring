@@ -50,7 +50,7 @@ public class EmployeeController {
         return employeeResponselist;
     }
 
-    //Get by employee empemail without using the employeeResponse to fetch data 
+   // Get by employee empemail without using the employeeResponse to fetch data 
     // @RequestMapping("employee2/{empEmail}")
     // public List <Employee> getAllEmployeeInfoByEmpEmail(@PathVariable String empEmail){
     //     return employeeService.getEmployeeByEmpEmail(empEmail);

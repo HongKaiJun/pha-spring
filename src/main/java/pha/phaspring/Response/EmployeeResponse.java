@@ -1,8 +1,14 @@
 package pha.phaspring.Response;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import pha.phaspring.Model.ChildrenDetail;
 import pha.phaspring.Model.Employee;
+import pha.phaspring.Model.EmployeeAddress;
 
 public class EmployeeResponse {
     @JsonProperty("ID")
@@ -16,6 +22,7 @@ public class EmployeeResponse {
     private String phoneNum;
     private String houseNum; 
     private String pdpa;
+
     @JsonProperty("EmployeeAddress")
     private String pCity;
     private String pState;
@@ -27,6 +34,7 @@ public class EmployeeResponse {
     private String cPostcode;
     private String cCountry;
     private String cAddress;
+    
     @JsonProperty("EmergencyContact")
     private String name1;
     private String relationship1;
@@ -41,8 +49,9 @@ public class EmployeeResponse {
     private String contactNum;
     private String marriageCert;
 
-    
+    private EmployeeAddressResponse employeeAddressResponse;
 
+    private List<ChildrenResponse> childrenResponse;
 
     public int getId() {
         return id;
@@ -180,6 +189,138 @@ public class EmployeeResponse {
     public void setPdpa(String pdpa) {
         this.pdpa = pdpa;
     }
+
+    public String getName1() {
+        return name1;
+    }
+
+
+
+
+    public void setName1(String name1) {
+        this.name1 = name1;
+    }
+
+
+
+
+    public String getRelationship1() {
+        return relationship1;
+    }
+
+
+
+
+    public void setRelationship1(String relationship1) {
+        this.relationship1 = relationship1;
+    }
+
+
+
+
+    public String getContactNum1() {
+        return contactNum1;
+    }
+
+
+
+
+    public void setContactNum1(String contactNum1) {
+        this.contactNum1 = contactNum1;
+    }
+
+
+
+
+    public String getName2() {
+        return name2;
+    }
+
+
+
+
+    public void setName2(String name2) {
+        this.name2 = name2;
+    }
+
+
+
+
+    public String getRelationship2() {
+        return relationship2;
+    }
+
+
+
+
+    public void setRelationship2(String relationship2) {
+        this.relationship2 = relationship2;
+    }
+
+
+
+
+    public String getContactNum2() {
+        return contactNum2;
+    }
+
+
+
+
+    public void setContactNum2(String contactNum2) {
+        this.contactNum2 = contactNum2;
+    }
+
+
+
+
+    public String getSpouseName() {
+        return spouseName;
+    }
+
+
+
+
+    public void setSpouseName(String spouseName) {
+        this.spouseName = spouseName;
+    }
+
+
+
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+
+
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+
+
+
+    public String getContactNum() {
+        return contactNum;
+    }
+
+
+
+
+    public void setContactNum(String contactNum) {
+        this.contactNum = contactNum;
+    }
+
+
+
+
+    public String getMarriageCert() {
+        return marriageCert;
+    }
+
+    
 
 
 
@@ -324,142 +465,39 @@ public class EmployeeResponse {
 
 
 
-    public String getName1() {
-        return name1;
-    }
-
-
-
-
-    public void setName1(String name1) {
-        this.name1 = name1;
-    }
-
-
-
-
-    public String getRelationship1() {
-        return relationship1;
-    }
-
-
-
-
-    public void setRelationship1(String relationship1) {
-        this.relationship1 = relationship1;
-    }
-
-
-
-
-    public String getContactNum1() {
-        return contactNum1;
-    }
-
-
-
-
-    public void setContactNum1(String contactNum1) {
-        this.contactNum1 = contactNum1;
-    }
-
-
-
-
-    public String getName2() {
-        return name2;
-    }
-
-
-
-
-    public void setName2(String name2) {
-        this.name2 = name2;
-    }
-
-
-
-
-    public String getRelationship2() {
-        return relationship2;
-    }
-
-
-
-
-    public void setRelationship2(String relationship2) {
-        this.relationship2 = relationship2;
-    }
-
-
-
-
-    public String getContactNum2() {
-        return contactNum2;
-    }
-
-
-
-
-    public void setContactNum2(String contactNum2) {
-        this.contactNum2 = contactNum2;
-    }
-
-
-
-
-    public String getSpouseName() {
-        return spouseName;
-    }
-
-
-
-
-    public void setSpouseName(String spouseName) {
-        this.spouseName = spouseName;
-    }
-
-
-
-
-    public String getOccupation() {
-        return occupation;
-    }
-
-
-
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
-
-
-
-
-    public String getContactNum() {
-        return contactNum;
-    }
-
-
-
-
-    public void setContactNum(String contactNum) {
-        this.contactNum = contactNum;
-    }
-
-
-
-
-    public String getMarriageCert() {
-        return marriageCert;
-    }
-
-
-
-
     public void setMarriageCert(String marriageCert) {
         this.marriageCert = marriageCert;
     }
+
+    
+
+
+
+    public EmployeeAddressResponse getEmployeeAddressResponse() {
+        return employeeAddressResponse;
+    }
+
+
+
+
+    public void setEmployeeAddressResponse(EmployeeAddressResponse employeeAddressResponse) {
+        this.employeeAddressResponse = employeeAddressResponse;
+    }
+
+
+
+
+    public List<ChildrenResponse> getChildrenResponse() {
+        return childrenResponse;
+    }
+
+
+
+
+    public void setChildrenResponse(List<ChildrenResponse> childrenResponse) {
+        this.childrenResponse = childrenResponse;
+    }
+
 
 
 
@@ -499,6 +537,12 @@ public class EmployeeResponse {
         this.occupation = employee.getSpouseDetail().getOccupation();
         this.contactNum = employee.getSpouseDetail().getContactNum();
         this.marriageCert = employee.getSpouseDetail().getMarriageCert();
+        //ChildDetail 
+        childrenResponse = new ArrayList<ChildrenResponse>();
+        for(ChildrenDetail childrenDetail : employee.getChildDetail()){
+            childrenResponse.add(new ChildrenResponse(childrenDetail));
+        }
+
     }
 
 
