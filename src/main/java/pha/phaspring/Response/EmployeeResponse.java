@@ -2,10 +2,12 @@ package pha.phaspring.Response;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import pha.phaspring.Model.ChildrenDetail;
+import pha.phaspring.Model.EducationDetails;
 import pha.phaspring.Model.Employee;
 
 public class EmployeeResponse {
@@ -49,6 +51,8 @@ public class EmployeeResponse {
 
     private List<ChildrenResponse> childrenResponse;
 
+    private List<EducationDetailsResponse> educationDetailsResponse;
+        
     public int getId() {
         return id;
     }
@@ -477,6 +481,18 @@ public class EmployeeResponse {
     }
 
 
+    public List<EducationDetailsResponse> getEducationDetailsResponse() {
+        return educationDetailsResponse;
+    }
+
+
+
+
+    public void setEducationDetailsResponse(List<EducationDetailsResponse> educationDetailsResponse) {
+        this.educationDetailsResponse = educationDetailsResponse;
+    }
+
+
 
 
     // fetch data from the entities and set it in the employee response 
@@ -519,6 +535,11 @@ public class EmployeeResponse {
         childrenResponse = new ArrayList<ChildrenResponse>();
         for(ChildrenDetail childrenDetail : employee.getChildDetail()){
             childrenResponse.add(new ChildrenResponse(childrenDetail));
+        }
+        //EducationDetails
+        educationDetailsResponse = new ArrayList<EducationDetailsResponse>();
+        for(EducationDetails educationDetails : employee.getEducationdetails()){
+            educationDetailsResponse.add(new EducationDetailsResponse(educationDetails));
         }
 
     }
