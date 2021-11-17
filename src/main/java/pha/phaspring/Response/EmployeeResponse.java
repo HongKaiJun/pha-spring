@@ -13,7 +13,7 @@ import pha.phaspring.Model.Employee;
 public class EmployeeResponse {
     @JsonProperty("ID")
     private int id;
-    private String employeeId;
+    private String lanId;
     private String empName;
     private String empEmail;
     private String passportNo;
@@ -65,17 +65,15 @@ public class EmployeeResponse {
     }
 
 
-
-
-    public String getEmployeeId() {
-        return employeeId;
+    public String getLanId() {
+        return lanId;
     }
 
 
 
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public void setLanId(String lanId) {
+        this.lanId = lanId;
     }
 
 
@@ -499,7 +497,7 @@ public class EmployeeResponse {
     public EmployeeResponse(Employee employee) {
         //Employee
         this.id= employee.getId();
-        this.employeeId= employee.getEmployeeId();
+        this.lanId = employee.getLanId();
         this.empName  = employee.getEmpName();
         this.empEmail=employee.getEmpEmail();
         this.passportNo=employee.getPassportNo();

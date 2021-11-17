@@ -26,8 +26,8 @@ public class Employee {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     
-    @Column(name = "EmployeeID")
-    private String employeeId;
+    @Column(name = "LANID")
+    private String lanId;
     @Column(name = "EmpName")
     private String empName;
     @Column(name = "PassportNo")
@@ -70,12 +70,12 @@ public class Employee {
     }
 
 
-    public Employee(int id, String employeeId, String empName, String passportNo, String passportCopy,
-            String maritalStatus, String phoneNum, String houseNum, String empEmail, String pdpa,
-            EmployeeAddress employeeAddress, EmergencyContact emergencyContact, SpouseDetail spouseDetail,
-            List<ChildrenDetail> childDetail) {
+    public Employee(int id, String lanId, String empName, String passportNo, String passportCopy, String maritalStatus,
+            String phoneNum, String houseNum, String empEmail, String pdpa, EmployeeAddress employeeAddress,
+            EmergencyContact emergencyContact, SpouseDetail spouseDetail, List<ChildrenDetail> childDetail,
+            Set<EducationDetails> educationdetails) {
         this.id = id;
-        this.employeeId = employeeId;
+        this.lanId = lanId;
         this.empName = empName;
         this.passportNo = passportNo;
         this.passportCopy = passportCopy;
@@ -88,7 +88,11 @@ public class Employee {
         this.emergencyContact = emergencyContact;
         this.spouseDetail = spouseDetail;
         this.childDetail = childDetail;
+        this.educationdetails = educationdetails;
     }
+
+
+
 
 
     public int getId() {
@@ -100,14 +104,13 @@ public class Employee {
         this.id = id;
     }
 
-
-    public String getEmployeeId() {
-        return employeeId;
+    public String getLanId() {
+        return lanId;
     }
 
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public void setLanId(String lanId) {
+        this.lanId = lanId;
     }
 
 
