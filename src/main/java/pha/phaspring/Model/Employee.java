@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="employee")
 public class Employee {
@@ -57,9 +59,11 @@ public class Employee {
     @JoinColumn(name="SpouseID")
     private SpouseDetail spouseDetail;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List <ChildrenDetail> childDetail;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(name = "employee_education",
     joinColumns = {@JoinColumn(name="employee_id")},

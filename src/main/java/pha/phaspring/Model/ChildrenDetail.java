@@ -40,7 +40,20 @@ public class ChildrenDetail {
     @JoinColumn(name = "EMPID")
     private Employee employee;
 
+    @ManyToOne
+    @JoinColumn(name = "testingId")
+    private Testing testing;
+
     
+    
+    public Testing getTesting() {
+        return testing;
+    }
+
+    public void setTesting(Testing testing) {
+        this.testing = testing;
+    }
+
     public Employee getEmployee() {
         return employee;
     }
