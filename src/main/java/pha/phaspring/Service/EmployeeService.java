@@ -38,6 +38,7 @@ public class EmployeeService {
         employee.setEmpName(employeeInfo.getEmpName());
         employee.setPassportNo(employeeInfo.getPassportNo());
         employee.setPassportCopy(employeeInfo.getPassportCopy());
+        employee.setExpiryDate(employeeInfo.getExpiryDate());
         employee.setMaritalStatus(employeeInfo.getMaritalStatus());
         employee.setPhoneNum(employeeInfo.getPhoneNum());
         employee.setHouseNum(employeeInfo.getHouseNum());
