@@ -1,5 +1,6 @@
 package pha.phaspring.Model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,6 +37,8 @@ public class Employee {
     private String passportNo;
     @Column(name = "PassportCopy")
     private String passportCopy;
+    @Column(name = "ExpiryDate")
+    private String expiryDate;
     @Column(name = "MaritalStatus")
     private String maritalStatus;
     @Column(name = "PhoneNum")
@@ -74,15 +77,16 @@ public class Employee {
     }
 
 
-    public Employee(int id, String lanId, String empName, String passportNo, String passportCopy, String maritalStatus,
-            String phoneNum, String houseNum, String empEmail, String pdpa, EmployeeAddress employeeAddress,
-            EmergencyContact emergencyContact, SpouseDetail spouseDetail, List<ChildrenDetail> childDetail,
-            Set<EducationDetails> educationdetails) {
+    public Employee(int id, String lanId, String empName, String passportNo, String passportCopy, String expiryDate,
+            String maritalStatus, String phoneNum, String houseNum, String empEmail, String pdpa,
+            EmployeeAddress employeeAddress, EmergencyContact emergencyContact, SpouseDetail spouseDetail,
+            List<ChildrenDetail> childDetail, Set<EducationDetails> educationdetails) {
         this.id = id;
         this.lanId = lanId;
         this.empName = empName;
         this.passportNo = passportNo;
         this.passportCopy = passportCopy;
+        this.expiryDate = expiryDate;
         this.maritalStatus = maritalStatus;
         this.phoneNum = phoneNum;
         this.houseNum = houseNum;
@@ -94,6 +98,8 @@ public class Employee {
         this.childDetail = childDetail;
         this.educationdetails = educationdetails;
     }
+
+
 
 
 
@@ -145,6 +151,15 @@ public class Employee {
 
     public void setPassportCopy(String passportCopy) {
         this.passportCopy = passportCopy;
+    }
+
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+
+
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
     }
 
 

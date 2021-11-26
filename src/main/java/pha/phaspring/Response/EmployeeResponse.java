@@ -18,6 +18,7 @@ public class EmployeeResponse {
     private String empEmail;
     private String passportNo;
     private String passportCopy;
+    private String expiryDate;
     private String maritalStatus;
     private String phoneNum;
     private String houseNum; 
@@ -130,6 +131,18 @@ public class EmployeeResponse {
 
     public void setPassportCopy(String passportCopy) {
         this.passportCopy = passportCopy;
+    }
+
+
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+
+
+
+
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
     }
 
 
@@ -502,6 +515,7 @@ public class EmployeeResponse {
         this.empEmail=employee.getEmpEmail();
         this.passportNo=employee.getPassportNo();
         this.passportCopy=employee.getPassportCopy();
+        this.expiryDate=employee.getExpiryDate();
         this.maritalStatus=employee.getMaritalStatus();
         this.phoneNum=employee.getPhoneNum();
         this.houseNum=employee.getHouseNum();
