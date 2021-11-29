@@ -1,13 +1,10 @@
 package pha.phaspring.Controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import pha.phaspring.Model.ChildrenDetail;
 import pha.phaspring.Model.Employee;
 import pha.phaspring.Model.Testing;
-import pha.phaspring.Repository.ChildrenDetailRepository;
 import pha.phaspring.Repository.TestingRepository;
 import pha.phaspring.Response.ChildrenResponse;
 import pha.phaspring.Response.EmployeeResponse;
@@ -39,7 +35,7 @@ public class EmployeeController {
     private TestingRepository testingRepository;
 
 
-    
+
 
     // Get All Employee
     @GetMapping("/")
@@ -63,6 +59,7 @@ public class EmployeeController {
 
         return employeeService.getEmployeeById(id, employeeInfo);
 
+
     }
 
 
@@ -80,13 +77,48 @@ public class EmployeeController {
          //One to One
         testing.getEmployeeAddress().setcCity(testingInfo.getEmployeeAddress().getcCity());
         
-    
 
+
+        //One to Many 
+        //Retrieving data 
+
+        
+        //Need help or advice on this two line 
+        List<ChildrenDetail> childrenDetailNew = testingInfo.getChildDetail().stream().collect(Collectors.toList());
+        
+        List<ChildrenDetail> childrenDetailOld = testing.getChildDetail().stream().collect(Collectors.toList());
+        
+        
+        //Update data once get 
+        for( ChildrenDetail cnew : childrenDetailNew){
+            Integer childId = cnew.getChildId();
+            String childName = cnew.getChildName();
+            Date getChildDate = cnew.getChildDate();
+            String getBirthCert = cnew.getBirthCert();
+            String getNationality = cnew.getNationality();
+            String getOccu = cnew.getOccu();
+            
+
+            for (ChildrenDetail cold: childrenDetailOld){
+                Integer childIdOld = cold.getChildId();
+
+                if(childId.equals(childIdOld)){
+                    cold.setChildName(childName);
+                    cold.setChildDate(getChildDate);
+                    cold.setBirthCert(getBirthCert);
+                    cold.setNationality(getNationality);
+                    cold.setOccu(getOccu);
+                }
+                
+            }
+
+
+        }
 
         //One to Many
-        List<ChildrenDetail> childrenDetail = testing.getChildDetail().stream().collect(Collectors.toList());
+        // List<ChildrenDetail> childrenDetail = testing.getChildDetail().stream().collect(Collectors.toList());
 
-        testing.setChildDetail(childrenDetail);
+        // testing.setChildDetail(childrenDetail);
         // List <ChildrenResponse> childrenResponse = new ArrayList<ChildrenResponse>();
         // for(ChildrenDetail childrenDetail : testingInfo.getChildDetail()){
         //     childrenResponse.add(new ChildrenResponse(childrenDetail));
@@ -98,7 +130,7 @@ public class EmployeeController {
         // List<String> getdata =testingInfo.getChildDetail().stream()
         // .map((c -> c.getChildId() + c.getChildName() + c.getBirthCert() + c.getChildDate() + c.getNationality())).collect(Collectors.toList());
         
-
+        
        // List<String> getdata = new ArrayList<testingInfo>();    
         
         //List<ChildrenDetail> childrenDetails = Arrays.asList(getdata.toArray());
@@ -127,10 +159,10 @@ public class EmployeeController {
         
         // List<ChildrenDetail> childrenDetail = testing.getChildDetail().stream().collect(Collectors.toList());
         // for( ChildrenDetail c : childrenDetail){
-        //     c.getChildId();
-        //     c.getChildName();
-        //     c.getChildDate();
-        //     c.getBirthCert();
+        //     // c.getChildId();
+        //     // c.getChildName();
+        //     // c.getChildDate();
+        //     // c.getBirthCert();
             
         //     // if (c.getChildId().equals()) {
         //         //         user.setUsername("newvalue");
@@ -141,6 +173,7 @@ public class EmployeeController {
         //     System.out.println(c);
         //     System.out.println("Show me the output!!");
         // }         
+   
         
         // List <ChildrenDetail> childrenDetailList = testing.getChildDetail();
         // List <ChildrenResponse> childrenResponseList = new ArrayList<ChildrenResponse>();

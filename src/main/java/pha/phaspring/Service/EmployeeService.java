@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import pha.phaspring.Model.Employee;
+import pha.phaspring.Model.Testing;
+import pha.phaspring.Repository.ChildrenDetailRepository;
 import pha.phaspring.Repository.EmployeeAddressRepository;
 import pha.phaspring.Repository.EmployeeRepository;
+import pha.phaspring.Request.UpdateChildRequest;
 import pha.phaspring.Response.EmployeeResponse;
 
 @Service
@@ -19,6 +22,9 @@ public class EmployeeService {
 
     @Autowired
     public EmployeeAddressRepository employeeAddressRepository;
+
+    @Autowired
+    public ChildrenDetailRepository childrenDetailRepository;
 
     //Get all employee related info
     public List <EmployeeResponse> getAllEmployees(){
@@ -93,6 +99,12 @@ public class EmployeeService {
         return updateEmployee;
     }
   
+    public List<UpdateChildRequest> getChildDetail(Integer testingId){
+        childrenDetailRepository.findBytestingId(testingId);
 
+        Testing testing=new Testing();
+        testing.getChildDetail();
     
+        return null;
+    }
 }
