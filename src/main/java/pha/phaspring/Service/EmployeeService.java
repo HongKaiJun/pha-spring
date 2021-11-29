@@ -1,12 +1,12 @@
 package pha.phaspring.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import pha.phaspring.Model.Employee;
-import pha.phaspring.Model.EmployeeAddress;
 import pha.phaspring.Repository.EmployeeAddressRepository;
 import pha.phaspring.Repository.EmployeeRepository;
 import pha.phaspring.Response.EmployeeResponse;
@@ -20,16 +20,32 @@ public class EmployeeService {
     @Autowired
     public EmployeeAddressRepository employeeAddressRepository;
 
+    //Get all employee related info
+    public List <EmployeeResponse> getAllEmployees(){
+        
+        List<Employee> employeeList = employeeRepository.findAll();
+        List<EmployeeResponse> employeeResponselist = new ArrayList<EmployeeResponse>();
 
-    public List <Employee> getAllEmployees(){
-        return employeeRepository.findAll();
+        employeeList.stream().forEach(employee ->{
+            employeeResponselist.add(new EmployeeResponse(employee));
+        });
+
+        return employeeResponselist;
     }
-    
 
-    public List<Employee> getEmployeeByEmpEmail(String empEmail){
-        return employeeRepository.findByEmpEmail(empEmail);
+    //Get all employee related info by email account 
+    public List <EmployeeResponse> getEmployeeByEmpEmail(String empEmail){
+
+        List<Employee> employeeList = employeeRepository.findByEmpEmail(empEmail);
+        List<EmployeeResponse> employeeResponselist = new ArrayList<EmployeeResponse>();
+
+        employeeList.stream().forEach(employee ->{
+            employeeResponselist.add(new EmployeeResponse(employee));
+        });
+
+        return employeeResponselist;
+        
     }
-
 
     //Update Function
     public Employee getEmployeeById(Integer id, @RequestBody Employee employeeInfo){
