@@ -45,7 +45,6 @@ public class ChildrenDetail {
     private Testing testing;
 
     
-    
     public Testing getTesting() {
         return testing;
     }

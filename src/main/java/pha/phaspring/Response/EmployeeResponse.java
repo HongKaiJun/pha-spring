@@ -53,6 +53,7 @@ public class EmployeeResponse {
     private List<ChildrenResponse> childrenResponse;
 
     private List<EducationDetailsResponse> educationDetailsResponse;
+
         
     public int getId() {
         return id;
@@ -502,6 +503,20 @@ public class EmployeeResponse {
     public void setEducationDetailsResponse(List<EducationDetailsResponse> educationDetailsResponse) {
         this.educationDetailsResponse = educationDetailsResponse;
     }
+
+
+
+
+    // public List<Integer> getEmpEdu() {
+    //     return empEdu;
+    // }
+
+
+
+
+    // public void setEmpEdu(List<Integer> empEdu) {
+    //     this.empEdu = empEdu;
+    // }
 
 
 
