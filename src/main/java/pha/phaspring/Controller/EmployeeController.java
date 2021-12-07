@@ -47,7 +47,7 @@ public class EmployeeController {
     public List<EmployeeResponse> getAllEmployeeInfoByEmpEmail(@PathVariable String empEmail) {
 
         return employeeService.getEmployeeByEmpEmail(empEmail);
-
+        
     }
 
     // Actual Update Function

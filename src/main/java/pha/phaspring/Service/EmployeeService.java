@@ -3,6 +3,7 @@ package pha.phaspring.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -10,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import pha.phaspring.Model.Employee;
-import pha.phaspring.Model.Testing;
 import pha.phaspring.Repository.ChildrenDetailRepository;
+import pha.phaspring.Repository.EducationDetailsRepository;
 import pha.phaspring.Repository.EmployeeAddressRepository;
 import pha.phaspring.Repository.EmployeeRepository;
-import pha.phaspring.Request.UpdateChildRequest;
 import pha.phaspring.Response.EmployeeResponse;
 
 @Service
@@ -29,9 +29,12 @@ public class EmployeeService {
     @Autowired
     public ChildrenDetailRepository childrenDetailRepository;
 
-    // Get all employee related info
-    public List<EmployeeResponse> getAllEmployees() {
+    @Autowired
+    public EducationDetailsRepository educationDetailsRepository;
 
+    //Get all employee related info
+    public List <EmployeeResponse> getAllEmployees(){
+        
         List<Employee> employeeList = employeeRepository.findAll();
         List<EmployeeResponse> employeeResponselist = new ArrayList<EmployeeResponse>();
 
@@ -64,7 +67,7 @@ public class EmployeeService {
         employee.setLanId(employeeInfo.getLanId());
         employee.setEmpName(employeeInfo.getEmpName());
         employee.setPassportNo(employeeInfo.getPassportNo());
-        employee.setPassportCopy(employeeInfo.getPassportCopy());
+        employee.setPassportCopy(employeeInfo.getPassportCopy()); //image upload 
         employee.setExpiryDate(employeeInfo.getExpiryDate());
         employee.setMaritalStatus(employeeInfo.getMaritalStatus());
         employee.setPhoneNum(employeeInfo.getPhoneNum());
