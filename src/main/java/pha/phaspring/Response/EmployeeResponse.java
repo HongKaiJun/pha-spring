@@ -554,8 +554,6 @@ public class EmployeeResponse {
     // }
 
 
-
-
     // fetch data from the entities and set it in the employee response 
     public EmployeeResponse(Employee employee) {
         //Employee
