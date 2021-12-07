@@ -2,7 +2,6 @@ package pha.phaspring.Response;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -23,6 +22,9 @@ public class EmployeeResponse {
     private String phoneNum;
     private String houseNum; 
     private String pdpa;
+    private String fileType;
+    private long size;
+    
 
     @JsonProperty("EmployeeAddress")
     private String pCity;
@@ -504,6 +506,39 @@ public class EmployeeResponse {
     }
 
 
+    public String getFileType() {
+        return fileType;
+    }
+
+
+
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+
+
+    public long getSize() {
+        return size;
+    }
+
+
+
+
+    public void setSize(long size) {
+        this.size = size;
+    }
+
+
+
+
+    public EmployeeResponse(String passportCopy, String fileType, long size) {
+        this.passportCopy = passportCopy;
+        this.fileType = fileType;
+        this.size = size;
+    }
+
+
 
 
     // fetch data from the entities and set it in the employee response 
@@ -555,6 +590,8 @@ public class EmployeeResponse {
         }
 
     }
+
+    
 
 
 }

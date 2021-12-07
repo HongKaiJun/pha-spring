@@ -1,29 +1,29 @@
 package pha.phaspring.Controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import pha.phaspring.Model.ChildrenDetail;
 import pha.phaspring.Model.Employee;
 import pha.phaspring.Model.Testing;
 import pha.phaspring.Repository.TestingRepository;
-import pha.phaspring.Response.ChildrenResponse;
 import pha.phaspring.Response.EmployeeResponse;
 import pha.phaspring.Service.EmployeeService;
 
-
-@CrossOrigin(origins ="http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/employee")
 public class EmployeeController {
@@ -34,193 +34,88 @@ public class EmployeeController {
     @Autowired
     private TestingRepository testingRepository;
 
-
-
-
     // Get All Employee
     @GetMapping("/")
-    public List <EmployeeResponse> getAllEmployeesInTable(){
-    
+    public List<EmployeeResponse> getAllEmployeesInTable() {
+
         return employeeService.getAllEmployees();
 
     }
 
-    //Get All Employee by Email
+    // Get All Employee by Email
     @GetMapping("/{empEmail}")
-    public List <EmployeeResponse> getAllEmployeeInfoByEmpEmail(@PathVariable String empEmail){
-     
+    public List<EmployeeResponse> getAllEmployeeInfoByEmpEmail(@PathVariable String empEmail) {
+
         return employeeService.getEmployeeByEmpEmail(empEmail);
 
     }
 
-    //Actual Update Function
+    // Actual Update Function
     @PutMapping("/{id}")
-    public Employee updateEmployeeInfoById(@PathVariable Integer id, @RequestBody Employee employeeInfo){
+    public Employee updateEmployeeInfoById(@PathVariable Integer id, @RequestBody Employee employeeInfo,
+            MultipartFile file) {
 
         return employeeService.getEmployeeById(id, employeeInfo);
 
+    }
+    //testing for employee upload passport need to use post instead put
+    @PostMapping("/post")
+    public EmployeeResponse uploadPassport(@RequestParam("file") MultipartFile file) {
+        Employee employee = employeeService.storePassport(file);
 
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile")
+                .path(employee.getPassportCopy()).toUriString();
+
+        return new EmployeeResponse(employee.getPassportCopy(), file.getContentType(), file.getSize());
+        // return null;
     }
 
-
-
-
-
-    //Testing !!!!!!!!!!!!!!!!!!!
+    // Testing !!!!!!!!!!!!!!!!!!!
     @PutMapping("/testing/{id}")
-    public Testing updateTestingId(@PathVariable Integer id, @RequestBody Testing testingInfo){
+    public Testing updateTestingId(@PathVariable Integer id, @RequestBody Testing testingInfo) {
         Testing testing = testingRepository.findById(id).get();
 
         testing.setFirstName(testingInfo.getFirstName());
         testing.setLastName(testingInfo.getLastName());
-        testing.setEmailId(testingInfo.getEmailId());       
-         //One to One
+        testing.setEmailId(testingInfo.getEmailId());
+        // One to One
         testing.getEmployeeAddress().setcCity(testingInfo.getEmployeeAddress().getcCity());
-        
 
+        // One to Many
+        // Retrieving data
 
-        //One to Many 
-        //Retrieving data 
+        // Need help or advice on this two line (check if empty or not)
+        //have a null pointer checking
+        List<ChildrenDetail> childrenDetailNew = testingInfo.getChildDetail();
 
-        
-        //Need help or advice on this two line 
-        List<ChildrenDetail> childrenDetailNew = testingInfo.getChildDetail().stream().collect(Collectors.toList());
-        
-        List<ChildrenDetail> childrenDetailOld = testing.getChildDetail().stream().collect(Collectors.toList());
-        
-        
-        //Update data once get 
-        for( ChildrenDetail cnew : childrenDetailNew){
+        //do compare pre-update with after update when the user click submit.
+        List<ChildrenDetail> childrenDetailOld = testing.getChildDetail();
+
+        // Update data once get
+        for (ChildrenDetail cnew : childrenDetailNew) {
             Integer childId = cnew.getChildId();
             String childName = cnew.getChildName();
             Date getChildDate = cnew.getChildDate();
             String getBirthCert = cnew.getBirthCert();
             String getNationality = cnew.getNationality();
             String getOccu = cnew.getOccu();
-            
-
-            for (ChildrenDetail cold: childrenDetailOld){
+            Integer testingId = cnew.getTesting().getId();
+            for (ChildrenDetail cold : childrenDetailOld) {
                 Integer childIdOld = cold.getChildId();
-
-                if(childId.equals(childIdOld)){
+                //left need to be constant , right need to be arrival
+                if (childIdOld.equals(childId)) {
                     cold.setChildName(childName);
                     cold.setChildDate(getChildDate);
                     cold.setBirthCert(getBirthCert);
                     cold.setNationality(getNationality);
                     cold.setOccu(getOccu);
                 }
-                
+
             }
 
-
         }
-
-        //One to Many
-        // List<ChildrenDetail> childrenDetail = testing.getChildDetail().stream().collect(Collectors.toList());
-
-        // testing.setChildDetail(childrenDetail);
-        // List <ChildrenResponse> childrenResponse = new ArrayList<ChildrenResponse>();
-        // for(ChildrenDetail childrenDetail : testingInfo.getChildDetail()){
-        //     childrenResponse.add(new ChildrenResponse(childrenDetail));
-        // }
-        
-        // List<ChildrenDetail> childrenDetails = new ArrayList<>();
-        
-        //List<String> stringList = new ArrayList<String>();
-        // List<String> getdata =testingInfo.getChildDetail().stream()
-        // .map((c -> c.getChildId() + c.getChildName() + c.getBirthCert() + c.getChildDate() + c.getNationality())).collect(Collectors.toList());
-        
-        
-       // List<String> getdata = new ArrayList<testingInfo>();    
-        
-        //List<ChildrenDetail> childrenDetails = Arrays.asList(getdata.toArray());
-        // //testing.setChildDetail(getdata);
-
-        // for (ChildrenDetail childrenDetail : getdata) {
-        //     if (childrenDetail.getChildId().equals()) {
-        //         user.setUsername("newvalue");
-        //         break;  
-        //     }
-        // }
-
-        //List<ChildrenDetail> childrenDetailUpdate = testingInfo.getChildDetail().stream().flatMap(child-> child.getChildId().stream()).collect(Collectors.toList());
-        //List<ChildrenDetail> childrenDetailinDB= testing.getChildDetail();
-        // List<ChildrenDetail> getchildrenDetailUpdate = testingInfo.getChildDetail();
-        // getchildrenDetailUpdate.forEach(child-> { child.getChildId();});
-        //Iterator<ChildrenDetail> childIterator = getchildrenDetail.iterator(); 
-      
-        
-        // testing.setChildDetail(getchildrenDetailUpdate);
-        // testing.setChildDetail(childrenDetailUpdate.addAll());
-        //SET UPDATE DATA into the model
-        // for (ChildrenDetail childrenDetail: testingInfo.getChildDetail()){
-        //     childrenDetail.setChildName(testingInfo.getChildDetail());
-        // }
-        
-        // List<ChildrenDetail> childrenDetail = testing.getChildDetail().stream().collect(Collectors.toList());
-        // for( ChildrenDetail c : childrenDetail){
-        //     // c.getChildId();
-        //     // c.getChildName();
-        //     // c.getChildDate();
-        //     // c.getBirthCert();
-            
-        //     // if (c.getChildId().equals()) {
-        //         //         user.setUsername("newvalue");
-        //         //         break;  
-        //         //     }
-            
-
-        //     System.out.println(c);
-        //     System.out.println("Show me the output!!");
-        // }         
-   
-        
-        // List <ChildrenDetail> childrenDetailList = testing.getChildDetail();
-        // List <ChildrenResponse> childrenResponseList = new ArrayList<ChildrenResponse>();
-        
-        // childrenDetailList.stream().forEach(children ->{
-        //     childrenResponseList.add(new ChildrenResponse(children));
-        // }); 
-        // List <ChildrenDetail> findAllChild =  childrenDetailRepository.findAll();
-        // for (ChildrenDetail c :findAllChild){
-            
-        // }
-
-        // List <ChildrenDetail> childrenDetails =  new ArrayList<ChildrenDetail>();
-        // for (ChildrenDetail c :childrenDetails){
-        //     c.getChildName(testing.setChildDetail());
-        // }
-
-        
-        //Collection<ChildrenDetail> existingchilddetail = new LinkedList<ChildrenDetail>();
-        
-
-
-        // List <ChildrenDetail> childrenDetail = testingInfo.getChildDetail().stream().collect(Collectors.toList());
-        // testing.setChildDetail(new ArrayList<ChildrenDetail>(childrenDetail));
-      
-        
-        // List <ChildrenDetail> childrenDetails = new ArrayList<ChildrenResponse>();
-        // for(List<ChildrenDetail> childrenDetail : testingInfo.getChildDetail()){
-        //     // childrenResponse.add(new ChildrenResponse(childrenDetail));
-
-        // }
-
-        //testing.getChildDetail().stream().forEach(child -> );;
-        //testing.getChildDetail().add(testingInfo.getChildDetail().addAll());
-        // ChildrenDetail childrenDetails = childrenDetailRepository.findBytestingId(testingId).get(id);
-        // childrenDetails.setChildName(testingInfo.getChildDetail().);
-         
-        //Many to Many 
-  
-        //testing.getChildDetail().stream()
-        //testing.setChildDetail(testingInfo.getChildDetail().forEach(child -> {}));
-        //testing.getChildDetail().toArray();
-        //testing.getChildDetail().stream().forEach(child -> {child.getChildName();});
-  
         Testing updateTesting = testingRepository.save(testing);
-        return  updateTesting;
+        return updateTesting;
     }
-
 
 }
