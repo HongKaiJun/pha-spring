@@ -2,6 +2,7 @@ package pha.phaspring.Model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,9 +30,8 @@ public class Testing {
     @OneToOne
     @JoinColumn(name="EmployeeAddress")
     private EmployeeAddress employeeAddress;
-
-    @JsonIgnore
-    @OneToMany(mappedBy="testing")
+    
+    @OneToMany(mappedBy="testing", cascade = CascadeType.ALL)
     private List <ChildrenDetail> childDetail;
 
     public Testing() {

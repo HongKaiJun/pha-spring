@@ -48,20 +48,16 @@ public class EmployeeService {
     }
 
     // Get all employee related info by email account
-    public List<EmployeeResponse> getEmployeeByEmpEmail(String empEmail) {
+    public EmployeeResponse getEmployeeByEmpEmail(String empEmail) {
 
-        List<Employee> employeeList = employeeRepository.findByEmpEmail(empEmail);
-        List<EmployeeResponse> employeeResponselist = new ArrayList<EmployeeResponse>();
-
-        employeeList.stream().forEach(employee -> {
-            employeeResponselist.add(new EmployeeResponse(employee));
-        });
+        Employee employeeList = employeeRepository.findByEmpEmail(empEmail);
+        EmployeeResponse employeeResponselist = new EmployeeResponse(employeeList);
 
         return employeeResponselist;
 
     }
 
-    // Update Function
+    // Update Function by ID 
     public Employee getEmployeeById(Integer id, @RequestBody Employee employeeInfo) {
         Employee employee = employeeRepository.findById(id).get();
 
@@ -107,6 +103,60 @@ public class EmployeeService {
         Employee updateEmployee = employeeRepository.save(employee);
         return updateEmployee;
     }
+
+    // Update Function by EmpEmail
+    public Employee getEmployeeByEmployeeEmail(String empEmail, @RequestBody EmployeeResponse employeeInfo) {
+        Employee employee = employeeRepository.findByempEmail(empEmail);
+        //String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        employee.setLanId(employeeInfo.getLanId());
+        employee.setEmpName(employeeInfo.getEmpName());
+        employee.setPassportNo(employeeInfo.getPassportNo());
+        employee.setPassportCopy(employeeInfo.getPassportCopy()); //image upload 
+        employee.setExpiryDate(employeeInfo.getExpiryDate());
+        employee.setMaritalStatus(employeeInfo.getMaritalStatus());
+        employee.setPhoneNum(employeeInfo.getPhoneNum());
+        employee.setHouseNum(employeeInfo.getHouseNum());
+        employee.setEmpEmail(employeeInfo.getEmpEmail());
+
+        // Employee Address
+        //System.out.println(employeeInfo.getEmployeeAddress().getcCity());
+        if(employeeInfo.getEmployeeAddress() != null){
+            //employee.setEmployeeAddress(employeeInfo.getEmployeeAddress());
+        }
+        System.out.println ("before the code");
+    
+        
+        employee.getEmployeeAddress().setpCity(employeeInfo.getEmployeeAddress().getpCity());;
+        employee.getEmployeeAddress().setpState(employeeInfo.getEmployeeAddress().getpState());
+        employee.getEmployeeAddress().setpPostcode(employeeInfo.getEmployeeAddress().getpPostcode());
+        employee.getEmployeeAddress().setpCountry(employeeInfo.getEmployeeAddress().getpCountry());
+        employee.getEmployeeAddress().setpAddress(employeeInfo.getEmployeeAddress().getpAddress());
+
+        employee.getEmployeeAddress().setcCity(employeeInfo.getEmployeeAddress().getcCity());
+        employee.getEmployeeAddress().setcState(employeeInfo.getEmployeeAddress().getcState());
+        employee.getEmployeeAddress().setcPostcode(employeeInfo.getEmployeeAddress().getcPostcode());
+        employee.getEmployeeAddress().setcCountry(employeeInfo.getEmployeeAddress().getcCountry());
+        employee.getEmployeeAddress().setcAddress(employeeInfo.getEmployeeAddress().getcAddress());
+        System.out.println ("after the code");
+        // // EmergencyContact
+        // employee.getEmergencyContact().setName1(employeeInfo.getEmergencyContactResponse().getName1());
+        // employee.getEmergencyContact().setRelationship1(employeeInfo.getEmergencyContactResponse().getRelationship1());
+        // employee.getEmergencyContact().setContactNum1(employeeInfo.getEmergencyContactResponse().getContactNum1());
+        // employee.getEmergencyContact().setName2(employeeInfo.getEmergencyContactResponse().getName2());
+        // employee.getEmergencyContact().setRelationship2(employeeInfo.getEmergencyContactResponse().getRelationship2());
+        // employee.getEmergencyContact().setContactNum2(employeeInfo.getEmergencyContactResponse().getContactNum2());
+
+        // // spouseDetail
+        // employee.getSpouseDetail().setSpouseName(employeeInfo.getSpouseDetailResponse().getSpouseName());
+        // employee.getSpouseDetail().setOccupation(employeeInfo.getSpouseDetailResponse().getOccupation());
+        // employee.getSpouseDetail().setContactNum(employeeInfo.getSpouseDetailResponse().getContactNum());
+        // employee.getSpouseDetail().setMarriageCert(employeeInfo.getSpouseDetailResponse().getMarriageCert());
+
+        Employee updateEmployee = employeeRepository.save(employee);
+        return updateEmployee;
+    }
+
+
 
     public List<UpdateChildRequest> getChildDetail(Integer testingId) {
         childrenDetailRepository.findBytestingId(testingId);

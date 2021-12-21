@@ -31,8 +31,8 @@ public class EducationDetails {
     @Column(name = "Certificate")
     private String certificate;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "educationdetails" )
-    private Set<Employee> employees = new HashSet<>();
+    // @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "educationdetails" )
+    // private Set<Employee> employees = new HashSet<>();
 
     public EducationDetails() {
     }
@@ -81,15 +81,15 @@ public class EducationDetails {
 
 
 
-    public Set<Employee> getEmployees() {
-        return employees;
-    }
+    // public Set<Employee> getEmployees() {
+    //     return employees;
+    // }
 
 
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
-    }
+    // public void setEmployees(Set<Employee> employees) {
+    //     this.employees = employees;
+    // }
 
     
 }

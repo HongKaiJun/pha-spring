@@ -20,6 +20,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import pha.phaspring.Response.EmployeeAddressResponse;
+
 
 @Entity
 @Table(name = "employee")
@@ -50,27 +56,28 @@ public class Employee {
     @Column(name = "PDPA")
     private String pdpa;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "AddressID")
     private EmployeeAddress employeeAddress;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "EmergencyContact")
     private EmergencyContact emergencyContact;
 
-    @OneToOne
-    @JoinColumn(name = "SpouseID")
+    //@JsonProperty(access = Access.WRITE_ONLY)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "SpouseID", referencedColumnName = "SpouseID")
     private SpouseDetail spouseDetail;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "employee")
-    private List<ChildrenDetail> childDetail;
+    //@JsonIgnore
+    // @OneToMany(mappedBy = "employee")
+    // private List<ChildrenDetail> childDetail;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "employee_education", joinColumns = { @JoinColumn(name = "employee_id") }, inverseJoinColumns = {
-            @JoinColumn(name = "education_empEdu") })
-    private Set<EducationDetails> educationdetails = new HashSet<>();
+    // //@JsonIgnore
+    // @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // @JoinTable(name = "employee_education", joinColumns = { @JoinColumn(name = "employee_id") }, inverseJoinColumns = {
+    //         @JoinColumn(name = "education_empEdu") })
+    // private Set<EducationDetails> educationdetails = new HashSet<>();
 
     @Column(name = "fileType")
     private String fileType;
@@ -88,9 +95,9 @@ public class Employee {
     }
 
     public Employee(int id, String lanId, String empName, String passportNo, String passportCopy, String expiryDate,
-            String maritalStatus, String phoneNum, String houseNum, String empEmail, String pdpa,
-            EmployeeAddress employeeAddress, EmergencyContact emergencyContact, SpouseDetail spouseDetail,
-            List<ChildrenDetail> childDetail, Set<EducationDetails> educationdetails, String fileType, byte[] data) {
+            String maritalStatus, String phoneNum, String houseNum, String empEmail, String pdpa, SpouseDetail spouseDetail,
+            EmployeeAddress employeeAddress, EmergencyContact emergencyContact,
+             String fileType, byte[] data) {
         this.id = id;
         this.lanId = lanId;
         this.empName = empName;
@@ -105,8 +112,8 @@ public class Employee {
         this.employeeAddress = employeeAddress;
         this.emergencyContact = emergencyContact;
         this.spouseDetail = spouseDetail;
-        this.childDetail = childDetail;
-        this.educationdetails = educationdetails;
+        // this.childDetail = childDetail;
+        // this.educationdetails = educationdetails;
         this.fileType = fileType;
         this.data = data;
     }
@@ -241,20 +248,20 @@ public class Employee {
         this.spouseDetail = spouseDetail;
     }
 
-    public List<ChildrenDetail> getChildDetail() {
-        return childDetail;
-    }
+    // public List<ChildrenDetail> getChildDetail() {
+    //     return childDetail;
+    // }
 
-    public void setChildDetail(List<ChildrenDetail> childDetail) {
-        this.childDetail = childDetail;
-    }
+    // public void setChildDetail(List<ChildrenDetail> childDetail) {
+    //     this.childDetail = childDetail;
+    // }
 
-    public Set<EducationDetails> getEducationdetails() {
-        return educationdetails;
-    }
+    // public Set<EducationDetails> getEducationdetails() {
+    //     return educationdetails;
+    // }
 
-    public void setEducationdetails(Set<EducationDetails> educationdetails) {
-        this.educationdetails = educationdetails;
-    }
+    // public void setEducationdetails(Set<EducationDetails> educationdetails) {
+    //     this.educationdetails = educationdetails;
+    // }
 
 }

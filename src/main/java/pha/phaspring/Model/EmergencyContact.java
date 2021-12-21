@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -30,6 +33,11 @@ public class EmergencyContact {
     @Column(name = "ContactNum_2")
     private String contactNum2;
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "emergencyContact")
+    private Employee employee;
+    
+    
     public int getEmergencyContact() {
         return emergencyContact;
     }
@@ -86,6 +94,13 @@ public class EmergencyContact {
         this.contactNum2 = contactNum2;
     }
 
-    
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
 
 }

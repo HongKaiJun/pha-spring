@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="spousedetail")
@@ -24,6 +27,10 @@ public class SpouseDetail {
     private String contactNum;
     @Column(name = "MarriageCert")
     private String marriageCert;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "spouseDetail")
+    private Employee employee;
 
     public int getSpouseId() {
         return spouseId;
@@ -64,6 +71,16 @@ public class SpouseDetail {
     public void setMarriageCert(String marriageCert) {
         this.marriageCert = marriageCert;
     }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    
 
     
     
