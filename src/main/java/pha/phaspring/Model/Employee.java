@@ -1,30 +1,22 @@
 package pha.phaspring.Model;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-import pha.phaspring.Response.EmployeeAddressResponse;
+import pha.phaspring.Response.ChildrenResponse;
 
 
 @Entity
@@ -69,9 +61,9 @@ public class Employee {
     @JoinColumn(name = "SpouseID", referencedColumnName = "SpouseID")
     private SpouseDetail spouseDetail;
 
-    //@JsonIgnore
-    // @OneToMany(mappedBy = "employee")
-    // private List<ChildrenDetail> childDetail;
+    
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<ChildrenDetail> childDetail;
 
     // //@JsonIgnore
     // @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -96,7 +88,7 @@ public class Employee {
 
     public Employee(int id, String lanId, String empName, String passportNo, String passportCopy, String expiryDate,
             String maritalStatus, String phoneNum, String houseNum, String empEmail, String pdpa, SpouseDetail spouseDetail,
-            EmployeeAddress employeeAddress, EmergencyContact emergencyContact,
+            EmployeeAddress employeeAddress, EmergencyContact emergencyContact,List<ChildrenDetail> childDetail,
              String fileType, byte[] data) {
         this.id = id;
         this.lanId = lanId;
@@ -112,7 +104,7 @@ public class Employee {
         this.employeeAddress = employeeAddress;
         this.emergencyContact = emergencyContact;
         this.spouseDetail = spouseDetail;
-        // this.childDetail = childDetail;
+        this.childDetail = childDetail;
         // this.educationdetails = educationdetails;
         this.fileType = fileType;
         this.data = data;
@@ -248,13 +240,15 @@ public class Employee {
         this.spouseDetail = spouseDetail;
     }
 
-    // public List<ChildrenDetail> getChildDetail() {
-    //     return childDetail;
-    // }
+    public List<ChildrenDetail> getChildDetail() {
+        return childDetail;
+    }
 
-    // public void setChildDetail(List<ChildrenDetail> childDetail) {
-    //     this.childDetail = childDetail;
-    // }
+    public void setChildDetail(List<ChildrenDetail> childDetail) {
+        this.childDetail = childDetail;
+    }
+
+  
 
     // public Set<EducationDetails> getEducationdetails() {
     //     return educationdetails;

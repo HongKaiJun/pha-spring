@@ -17,8 +17,7 @@ public class ChildrenResponse {
 
     
 
-    public ChildrenResponse() {
-    }
+  
     
     public int getChildId() {
         return childId;
@@ -61,6 +60,8 @@ public class ChildrenResponse {
 
     public void setOccu(String occu) {
         this.occu = occu;
+    }
+    public ChildrenResponse() {
     }
 
     public ChildrenResponse (ChildrenDetail childrenDetail){

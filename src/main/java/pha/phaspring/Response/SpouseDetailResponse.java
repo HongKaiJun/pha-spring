@@ -3,12 +3,20 @@ package pha.phaspring.Response;
 import pha.phaspring.Model.SpouseDetail;
 
 public class SpouseDetailResponse {
+
+    private int spouseId;
     private String spouseName;
     private String occupation;
     private String contactNum;
     private String marriageCert;
 
     
+    public int getSpouseId() {
+        return spouseId;
+    }
+    public void setSpouseId(int spouseId) {
+        this.spouseId = spouseId;
+    }
     public String getSpouseName() {
         return spouseName;
     }
@@ -37,6 +45,7 @@ public class SpouseDetailResponse {
     public SpouseDetailResponse() {
     }
     public SpouseDetailResponse(SpouseDetail spouseDetail) {
+        this.spouseId = spouseDetail.getSpouseId();
         this.spouseName = spouseDetail.getSpouseName();
         this.occupation = spouseDetail.getOccupation();
         this.contactNum = spouseDetail.getContactNum();

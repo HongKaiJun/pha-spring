@@ -1,15 +1,16 @@
 package pha.phaspring.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import pha.phaspring.Model.ChildrenDetail;
 import pha.phaspring.Model.Employee;
 
 public class EmployeeResponse {
 
     
-    @JsonProperty("ID")
     private int id;
     private String lanId;
     private String empName;
@@ -24,14 +25,16 @@ public class EmployeeResponse {
     private String fileType;
     private long size;
     
-
+    
     private SpouseDetailResponse spouseDetail;
+
+    
 
     private EmployeeAddressResponse employeeAddress;
 
     private EmergencyContactResponse emergencyContact;
 
-    private List<ChildrenResponse> childrenResponse;
+    private List<ChildrenResponse> childDetail;
 
     private List<EducationDetailsResponse> educationDetailsResponse;
 
@@ -184,16 +187,22 @@ public class EmployeeResponse {
         this.pdpa = pdpa;
     }
 
-  
 
-    public List<ChildrenResponse> getChildrenResponse() {
-        return childrenResponse;
+
+
+
+    public List<ChildrenResponse> getChildDetail() {
+        return childDetail;
     }
 
 
-    public void setChildrenResponse(List<ChildrenResponse> childrenResponse) {
-        this.childrenResponse = childrenResponse;
+
+
+    public void setChildDetail(List<ChildrenResponse> childDetail) {
+        this.childDetail = childDetail;
     }
+
+
 
 
     public List<EducationDetailsResponse> getEducationDetailsResponse() {
@@ -312,19 +321,19 @@ public class EmployeeResponse {
 
         //EmployeeAddress
         employeeAddress= new EmployeeAddressResponse(employee.getEmployeeAddress());
-       
-
+        
         //EmergencyContact
         emergencyContact = new EmergencyContactResponse(employee.getEmergencyContact());
 
         //SpouseDetail
         spouseDetail = new SpouseDetailResponse(employee.getSpouseDetail());
 
-        // ChildDetail 
-        // childrenResponse = new ArrayList<ChildrenResponse>();
-        // for(ChildrenDetail childrenDetail : employee.getChildDetail()){
-        //     childrenResponse.add(new ChildrenResponse(childrenDetail));
-        // }
+
+        //ChildDetail 
+        childDetail = new ArrayList<ChildrenResponse>();
+        for(ChildrenDetail childrenDetail : employee.getChildDetail()){
+            childDetail.add(new ChildrenResponse(childrenDetail));
+        }
         // //EducationDetails
         // educationDetailsResponse = new ArrayList<EducationDetailsResponse>();
         // for(EducationDetails educationDetails : employee.getEducationdetails()){
@@ -333,7 +342,10 @@ public class EmployeeResponse {
 
     }
 
-    
 
+    public EmployeeResponse() {
+    }
+
+    
 
 }

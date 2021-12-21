@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table (name ="childrendetail")
 public class ChildrenDetail {
@@ -36,13 +38,15 @@ public class ChildrenDetail {
     @Column(name = "Occu")
     private String occu;
 
-    
-    // @ManyToOne
-    // @JoinColumn(name = "EMPID")
-    // private Employee employee;
+   
+    @ManyToOne
+    @JoinColumn(name = "EMPID")
+    @JsonIgnore
+    private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "testingId")
+    @JsonIgnore
     private Testing testing;
 
     
@@ -54,13 +58,13 @@ public class ChildrenDetail {
         this.testing = testing;
     }
 
-    // public Employee getEmployee() {
-    //     return employee;
-    // }
+    public Employee getEmployee() {
+        return employee;
+    }
 
-    // public void setEmployee(Employee employee) {
-    //     this.employee = employee;
-    // }
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
     public int getChildId() {
         return childId;

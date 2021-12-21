@@ -1,8 +1,10 @@
 package pha.phaspring.Response;
 
+import pha.phaspring.Model.Employee;
 import pha.phaspring.Model.EmployeeAddress;
 
 public class EmployeeAddressResponse {
+    private int addressId;
     private String pCity;
     private String pState;
     private String pPostcode;
@@ -14,6 +16,13 @@ public class EmployeeAddressResponse {
     private String cCountry;
     private String cAddress;
 
+    
+    public int getAddressId() {
+        return addressId;
+    }
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
+    }
     public String getpCity() {
         return pCity;
     }
@@ -75,7 +84,13 @@ public class EmployeeAddressResponse {
         this.cAddress = cAddress;
     }
 
+    
+
+    public EmployeeAddressResponse() {
+    }
+    
     public EmployeeAddressResponse (EmployeeAddress employeeAddress){
+        this.addressId =employeeAddress.getAddressId();
         this.pCity = employeeAddress.getpCity();
         this.pState =employeeAddress.getpState();
         this.pPostcode = employeeAddress.getpPostcode();
@@ -89,5 +104,5 @@ public class EmployeeAddressResponse {
 
     }
 
-    
+  
 }

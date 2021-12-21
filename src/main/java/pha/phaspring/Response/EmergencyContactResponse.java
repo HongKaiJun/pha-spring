@@ -4,6 +4,7 @@ import pha.phaspring.Model.EmergencyContact;
 
 public class EmergencyContactResponse {
 
+    private int emergencyContact;
     private String name1;
     private String relationship1;
     private String contactNum1;
@@ -12,6 +13,12 @@ public class EmergencyContactResponse {
     private String contactNum2;
 
 
+    public int getEmergencyContact() {
+        return emergencyContact;
+    }
+    public void setEmergencyContact(int emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
     public String getName1() {
         return name1;
     }
@@ -53,6 +60,7 @@ public class EmergencyContactResponse {
     }
 
     public EmergencyContactResponse(EmergencyContact emergencyContact) {
+        this.emergencyContact = emergencyContact.getEmergencyContact();
         this.name1 = emergencyContact.getName1();
         this.relationship1 = emergencyContact.getRelationship1();
         this.contactNum1 = emergencyContact.getContactNum1();

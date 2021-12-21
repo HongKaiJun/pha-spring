@@ -3,6 +3,7 @@ package pha.phaspring.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import pha.phaspring.Model.ChildrenDetail;
 import pha.phaspring.Model.Employee;
 import pha.phaspring.Model.Testing;
 import pha.phaspring.Repository.ChildrenDetailRepository;
@@ -100,6 +102,8 @@ public class EmployeeService {
         employee.getSpouseDetail().setContactNum(employeeInfo.getSpouseDetail().getContactNum());
         employee.getSpouseDetail().setMarriageCert(employeeInfo.getSpouseDetail().getMarriageCert());
 
+
+
         Employee updateEmployee = employeeRepository.save(employee);
         return updateEmployee;
     }
@@ -119,13 +123,6 @@ public class EmployeeService {
         employee.setEmpEmail(employeeInfo.getEmpEmail());
 
         // Employee Address
-        //System.out.println(employeeInfo.getEmployeeAddress().getcCity());
-        if(employeeInfo.getEmployeeAddress() != null){
-            //employee.setEmployeeAddress(employeeInfo.getEmployeeAddress());
-        }
-        System.out.println ("before the code");
-    
-        
         employee.getEmployeeAddress().setpCity(employeeInfo.getEmployeeAddress().getpCity());;
         employee.getEmployeeAddress().setpState(employeeInfo.getEmployeeAddress().getpState());
         employee.getEmployeeAddress().setpPostcode(employeeInfo.getEmployeeAddress().getpPostcode());
@@ -137,20 +134,26 @@ public class EmployeeService {
         employee.getEmployeeAddress().setcPostcode(employeeInfo.getEmployeeAddress().getcPostcode());
         employee.getEmployeeAddress().setcCountry(employeeInfo.getEmployeeAddress().getcCountry());
         employee.getEmployeeAddress().setcAddress(employeeInfo.getEmployeeAddress().getcAddress());
-        System.out.println ("after the code");
-        // // EmergencyContact
-        // employee.getEmergencyContact().setName1(employeeInfo.getEmergencyContactResponse().getName1());
-        // employee.getEmergencyContact().setRelationship1(employeeInfo.getEmergencyContactResponse().getRelationship1());
-        // employee.getEmergencyContact().setContactNum1(employeeInfo.getEmergencyContactResponse().getContactNum1());
-        // employee.getEmergencyContact().setName2(employeeInfo.getEmergencyContactResponse().getName2());
-        // employee.getEmergencyContact().setRelationship2(employeeInfo.getEmergencyContactResponse().getRelationship2());
-        // employee.getEmergencyContact().setContactNum2(employeeInfo.getEmergencyContactResponse().getContactNum2());
 
-        // // spouseDetail
-        // employee.getSpouseDetail().setSpouseName(employeeInfo.getSpouseDetailResponse().getSpouseName());
-        // employee.getSpouseDetail().setOccupation(employeeInfo.getSpouseDetailResponse().getOccupation());
-        // employee.getSpouseDetail().setContactNum(employeeInfo.getSpouseDetailResponse().getContactNum());
-        // employee.getSpouseDetail().setMarriageCert(employeeInfo.getSpouseDetailResponse().getMarriageCert());
+        // EmergencyContact
+        employee.getEmergencyContact().setName1(employeeInfo.getEmergencyContact().getName1());
+        employee.getEmergencyContact().setRelationship1(employeeInfo.getEmergencyContact().getRelationship1());
+        employee.getEmergencyContact().setContactNum1(employeeInfo.getEmergencyContact().getContactNum1());
+        employee.getEmergencyContact().setName2(employeeInfo.getEmergencyContact().getName2());
+        employee.getEmergencyContact().setRelationship2(employeeInfo.getEmergencyContact().getRelationship2());
+        employee.getEmergencyContact().setContactNum2(employeeInfo.getEmergencyContact().getContactNum2());
+
+        // spouseDetail
+        employee.getSpouseDetail().setSpouseName(employeeInfo.getSpouseDetail().getSpouseName());
+        employee.getSpouseDetail().setOccupation(employeeInfo.getSpouseDetail().getOccupation());
+        employee.getSpouseDetail().setContactNum(employeeInfo.getSpouseDetail().getContactNum());
+        employee.getSpouseDetail().setMarriageCert(employeeInfo.getSpouseDetail().getMarriageCert());
+
+        // childrendetail 
+        if (employeeInfo.getChildDetail() != null){
+            
+            //employee.setChildDetail(employeeInfo.getChildDetail());
+        }
 
         Employee updateEmployee = employeeRepository.save(employee);
         return updateEmployee;
